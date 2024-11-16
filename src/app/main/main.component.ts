@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
-import { ThemesComponent } from './themes/themes.component';
-import { PostsComponent } from './posts/posts.component';
+import { ThemesComponent } from '../theme/themes/themes.component';
+import { PostsComponent } from '../posts/posts.component';
+
+
+
 
 @Component({
   selector: 'app-main',

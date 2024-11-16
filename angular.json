@@ -24,6 +24,14 @@
               {
                 "glob": "**/*",
                 "input": "public"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/app/core/header/images"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/app/user/profile/images"
               }
             ],
             "styles": [
