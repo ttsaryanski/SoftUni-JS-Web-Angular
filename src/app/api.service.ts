@@ -29,7 +29,14 @@ export class ApiService {
     
     getSingleTheme(id: string) {
         const { apiUrl } = environment;
-
+        
         return this.http.get<Theme>(`${apiUrl}/themes/${id}`);
+    }
+    
+    createTheme(themeName: string, themeText: string) {
+        const { apiUrl } = environment;
+        const payload = { themeName, themeText };
+
+        return this.http.post<Theme>(`${apiUrl}/themes`, payload);
     }
 }

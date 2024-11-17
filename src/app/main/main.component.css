@@ -4,11 +4,33 @@
     width: 50%;
 } */
 
+/* Основен контейнер */
 .container {
-    width: 90%;
-    margin: auto;
-    padding-bottom: 4.5em;
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-evenly;
+  display: flex;
+  flex-direction: column; /* По подразбиране всички компоненти са вертикални */
+  align-items: center; /* Центриране по хоризонтала */
+  width: 90%;
+  margin: auto;
+  padding-bottom: 4.5em;
 }
+
+/* Под-контейнер за теми и постове */
+.sub-container {
+  display: flex;
+  justify-content: space-evenly; /* Подравнява темите и постовете един до друг */
+  width: 100%; /* Задава ширината на темите и постовете */
+}
+
+/* Когато потребителят е логнат */
+.container:not(.vertical) .sub-container {
+  flex-direction: row; /* Подрежда хоризонтално */
+}
+
+/* Когато потребителят не е логнат */
+.container.vertical .sub-container {
+  flex-direction: row; /* Темите и постовете остават хоризонтални */
+  margin-top: 1em; /* Добавя разстояние между home и sub-container */
+}
+
+  
+  

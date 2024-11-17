@@ -1,4 +1,9 @@
-<div class="container">
-    <app-themes />
-    <app-posts />
+<div class="container" [class]="{'vertical' : !isLoggedIn}" >
+    @if (!isLoggedIn) {
+    <app-home />
+    }
+    <div class="sub-container">
+        <app-themes />
+        <app-posts />
+    </div>
 </div>

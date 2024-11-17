@@ -7,6 +7,7 @@ import { ProfileComponent } from './user/profile/profile.component';
 import { CreateThemeComponent } from './theme/create-theme/create-theme.component';
 import { MainComponent } from './main/main.component';
 import { DetailsThemeComponent } from './theme/details-theme/details-theme.component';
+import { PostsComponent } from './posts/posts.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -24,6 +25,8 @@ export const routes: Routes = [
     ],
   },
   { path: 'create-theme', component: CreateThemeComponent },
+
+  { path: 'posts', component: PostsComponent },
 
   { path: '404', component: ErrorComponent },
   { path: '**', redirectTo: '/404' },
