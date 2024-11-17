@@ -40,6 +40,7 @@
             </div>
         </div>
         }
+        @if (isLoggedIn) {
         <div class="answer-comment">
             <p><span>{{firsName}}</span> comment:</p>
             <div class="answer">
@@ -49,7 +50,7 @@
                 </form>
             </div>
         </div>
-
+        }
     </div>
     }
 </div>
