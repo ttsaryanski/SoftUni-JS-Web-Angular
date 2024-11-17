@@ -45,6 +45,7 @@
 .subscribers {
     text-align: right;
     flex-basis: 25%;
+    text-shadow: none;
 }
 
 .subscribers button {
@@ -115,7 +116,7 @@
 
 .post-content p {
     padding-left: 1.5em;
-    color: white;
+    color: black;
 }
 
 .userdetails div {
