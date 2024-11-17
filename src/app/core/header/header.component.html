@@ -8,10 +8,10 @@
             <ul>
                 @if (isLoggedIn) {
                 <li>
-                    <a href="#">John's profile</a>
+                    <a routerLink="/profile">{{firstName}} profile</a>
                 </li>
                 <li>
-                    <a href="#">Logout</a>
+                    <a (click)="logout()">Logout</a>
                 </li>
                 }
                 @else {
@@ -33,9 +33,11 @@
             <li>
                 <a routerLink="/themes">Themes</a>
             </li>
-            <li>
-                <a routerLink="/create-theme">New Theme</a>
-            </li>
+            @if (isLoggedIn) {
+                <li>
+                    <a routerLink="/create-theme">New Theme</a>
+                </li>
+            }
         </ul>
     </nav>
 

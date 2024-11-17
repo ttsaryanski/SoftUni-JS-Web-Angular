@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ThemesComponent } from '../theme/themes/themes.component';
 import { PostsComponent } from '../posts/posts.component';
 import { HomeComponent } from '../home/home.component';
+import { UserService } from '../user/user.service';
 
 
 
@@ -14,6 +15,10 @@ import { HomeComponent } from '../home/home.component';
     styleUrl: './main.component.css'
 })
 export class MainComponent {
-    isLoggedIn: boolean = false;
+    constructor(private userService: UserService) {};
+
+    get isLoggedIn(): boolean {
+        return this.userService.isLogged;
+    };
 
 }

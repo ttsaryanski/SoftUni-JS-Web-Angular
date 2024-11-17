@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ApiService } from '../../api.service';
 
 @Component({
@@ -10,14 +10,13 @@ import { ApiService } from '../../api.service';
     styleUrl: './create-theme.component.css',
 })
 export class CreateThemeComponent {
-    constructor(private apiService: ApiService){};
+    constructor(private apiService: ApiService, private route: ActivatedRoute, private router: Router){};
 
     createTheme(event: Event, themeName: string, themeText: string) {
         event.preventDefault();
 
-        this.apiService.createTheme(themeName, themeText).subscribe((data) => {
-            console.log(data);
-        })
+        //this.apiService.createTheme(themeName, themeText).subscribe((data) => {})
+        this.router.navigate(['/xxx']);
     }
 };
 

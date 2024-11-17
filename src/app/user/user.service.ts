@@ -23,8 +23,8 @@ export class UserService {
 
     login() {
         this.user = {
-            firstName: 'John',
-            email: 'john.doe@abv.bg',
+            firstName: 'Tsetso',
+            email: 'tsetso@abv.bg',
             phoneNumber: '123-123-123',
             password: '123123',
             id: 'asdasdsadsadsa',
@@ -32,6 +32,15 @@ export class UserService {
 
         localStorage.setItem(this.USER_KEY, JSON.stringify(this.user));
     };
+
+    getUser(): any {
+        const userJson = localStorage.getItem(this.USER_KEY);
+        if (userJson) {
+            return JSON.parse(userJson); // Превръща JSON в JavaScript обект
+        }
+        return null; // Ако няма съхранен потребител
+    }
+    
 
     logout() {
         this.user = null;
