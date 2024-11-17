@@ -2,16 +2,16 @@
     <div class="profile"><img src="profile.png" alt="default user">
         <h3>User Info:</h3>
         <div class="flex">
-            <p>Username: </p>
-            <p>{{currentUser.firstName}}</p>
+            <p>Username: {{currentUser.firstName}}</p>
+            <!-- <p>{{currentUser.firstName}}</p> -->
         </div>
         <div class="flex">
-            <p>Email: </p>
-            <p>{{currentUser.email}}</p>
+            <p>Email: {{currentUser.email}}</p>
+            <!-- <p>{{currentUser.email}}</p> -->
         </div>
         <div class="flex">
-            <p>Phone: </p>
-            <p>{{currentUser.phoneNumber}}</p>
+            <p>Phone: {{currentUser.phoneNumber}}</p>
+            <!-- <p>{{currentUser.phoneNumber}}</p> -->
         </div>
         <button class="edit-button" (click)="editProfile($event)">Edit</button>
     </div>
