@@ -8,6 +8,7 @@ import {
   setEmailErrorClass,
   setPasswordErrorClass,
 } from '../../utils/set.dinamic.class';
+import { setButtonAttributes } from '../../utils/buttonStatus';
 
 @Component({
   selector: 'app-login',
@@ -26,6 +27,10 @@ export class LoginComponent {
 
   setPasswordClass(password: any) {
     return setPasswordErrorClass(password);
+  }
+
+  setButton(form: any) {
+    return setButtonAttributes(form);
   }
 
   login(form: NgForm) {

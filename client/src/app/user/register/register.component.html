@@ -1,87 +1,143 @@
 <div class="container">
-  <form class="register" action="" method="post">
+  <form class="register" [formGroup]="form" (ngSubmit)="register()">
     <fieldset>
       <h2>Registration Form</h2>
 
       <!-- username -->
       <p class="field field-icon">
-        <label for="username"
-          ><span><i class="fas fa-user"></i></span
-        ></label>
+        <label for="username">
+          <span>
+            <i class="fas fa-user"></i>
+          </span>
+        </label>
         <input
-          class="input-error"
+          [class]="setUsernameClass(form.get('username'))"
           type="text"
           name="username"
           id="username"
           placeholder="Johny"
+          formControlName="username"
         />
       </p>
-      <p class="error">Username is required!</p>
+
+      @if(form.get('username')?.touched){
+      <div>
+        @if(form.get('username')?.errors?.['required']){
+        <p class="error">Username is required!</p>
+        }
+        <!--  -->
+        @if(form.get('username')?.errors?.['minlength']){
+        <p class="error">Username must be at least 5 characters!</p>
+        }
+      </div>
+      }
 
       <!-- email -->
       <p class="field field-icon">
-        <label for="email"
-          ><span><i class="fas fa-envelope"></i></span
-        ></label>
+        <label for="email">
+          <span>
+            <i class="fas fa-envelope"></i>
+          </span>
+        </label>
         <input
+          [class]="setEmailClass(form.get('email'))"
           type="email"
           name="email"
           id="email"
           placeholder="john.doe@gmail.com"
+          formControlName="email"
         />
       </p>
-      <!-- <p class="error">
-                Email is required!
-            </p>
-            <p class="error">
-                Email is not valid!
-            </p> -->
+      @if(form.get('email')?.touched){
+      <div>
+        @if(form.get('email')?.errors?.['required']){
+        <p class="error">Email is required!</p>
+        }
+        <!--  -->
+        @if(form.get('email')?.errors?.['emailValidator']){
+        <p class="error">Email is not valid!</p>
+        }
+      </div>
+      }
 
       <!-- telephone -->
       <p class="field field-icon">
-        <label for="tel"
-          ><span><i class="fas fa-phone"></i></span
-        ></label>
+        <label for="tel">
+          <span>
+            <i class="fas fa-phone"></i>
+          </span>
+        </label>
         <select name="select-tel" id="select-tel" class="tel">
           <option value="00359">+359</option>
         </select>
-        <input type="text" name="tel" id="tel" placeholder="885 888 888" />
-      </p>
-
-      <!-- password -->
-      <p class="field field-icon">
-        <label for="password"
-          ><span><i class="fas fa-lock"></i></span
-        ></label>
         <input
-          type="password"
-          name="password"
-          id="password"
-          placeholder="******"
+          type="text"
+          name="tel"
+          id="tel"
+          placeholder="885 888 888"
+          formControlName="tel"
         />
       </p>
-      <!-- <p class="error">
-                Password is required!
-            </p>
-            <p class="error">
-                Password must be at least 4 characters!
-            </p> -->
 
-      <!-- rePassword -->
-      <p class="field field-icon">
-        <label for="rePassword"
-          ><span><i class="fas fa-lock"></i></span
-        ></label>
-        <input
-          type="password"
-          name="rePassword"
-          id="rePassword"
-          placeholder="******"
-        />
-      </p>
-      <!-- <p class="error">Repeat Password does not match password!</p> -->
+      <div formGroupName="passGroup">
+        <!-- password -->
+        <p class="field field-icon">
+          <label for="password">
+            <span>
+              <i class="fas fa-lock"></i>
+            </span>
+          </label>
+          <input
+            [class]="setPasswordClass(passGroup?.get('password'))"
+            type="password"
+            name="password"
+            id="password"
+            placeholder="******"
+            formControlName="password"
+          />
+        </p>
+        @if(passGroup?.get('password')?.touched){
+        <div>
+          @if(passGroup?.get('password')?.errors?.['required']){
+          <p class="error">Password is required!</p>
+          }
+          <!--  -->
+          @if(passGroup?.get('password')?.errors?.['minlength']){
+          <p class="error">Password must be at least 5 characters!</p>
+          }
+        </div>
+        }
+        <!-- <p class="error">
+                    Password is required!
+                </p>
+                <p class="error">
+                    Password must be at least 4 characters!
+                </p> -->
 
-      <button disabled>Create Account</button>
+        <!-- rePassword -->
+        <p class="field field-icon">
+          <label for="rePassword">
+            <span>
+              <i class="fas fa-lock"></i>
+            </span>
+          </label>
+          <input
+            type="password"
+            name="rePassword"
+            id="rePassword"
+            placeholder="******"
+            formControlName="rePassword"
+          />
+        </p>
+        <!-- <p class="error">Repeat Password does not match password!</p> -->
+      </div>
+
+      <button
+        [disabled]="setButton(form).disabled"
+        [style]="setButton(form).style"
+      >
+        Create Account
+      </button>
 
       <p class="text-center">
         Have an account?

@@ -60,8 +60,8 @@
       }
 
       <button
-        [disabled]="form.invalid"
-        [style]="{ backgroundColor: form.invalid ? 'grey' : '#234465' }"
+        [disabled]="setButton(form).disabled"
+        [style]="setButton(form).style"
       >
         Login
       </button>
