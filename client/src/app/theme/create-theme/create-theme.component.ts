@@ -32,6 +32,6 @@ export class CreateThemeComponent {
     console.log(form.value);
     form.reset();
     //this.apiService.createTheme(themeName, themeText).subscribe((data) => {})
-    //this.router.navigate(['/xxx']);
+    this.router.navigate(['/themes']);
   }
 }
