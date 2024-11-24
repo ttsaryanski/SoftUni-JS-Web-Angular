@@ -10,9 +10,10 @@ import { setButtonAttributes } from '../../utils/buttonStatus';
 import {
   setEmailErrorClass,
   setPasswordErrorClass,
+  setRePasswordErrorClass,
   setUsernameErrorClass,
 } from '../../utils/set.dinamic.class';
-import { emailValidator } from '../../utils/validators';
+import { emailValidator, matchPasswordValidator } from '../../utils/validators';
 import { DOMAINS } from '../../constants';
 
 @Component({
@@ -30,13 +31,18 @@ export class RegisterComponent {
     ]),
     email: new FormControl('', [Validators.required, emailValidator(DOMAINS)]),
     tel: new FormControl(''),
-    passGroup: new FormGroup({
-      password: new FormControl('', [
-        Validators.required,
-        Validators.minLength(5),
-      ]),
-      rePassword: new FormControl('', [Validators.required]),
-    }),
+    passGroup: new FormGroup(
+      {
+        password: new FormControl('', [
+          Validators.required,
+          Validators.minLength(5),
+        ]),
+        rePassword: new FormControl('', [Validators.required]),
+      },
+      {
+        validators: [matchPasswordValidator('password', 'rePassword')],
+      }
+    ),
   });
 
   get passGroup() {
@@ -59,11 +65,16 @@ export class RegisterComponent {
     return setPasswordErrorClass(password);
   }
 
+  setRePasswordClass(rePassword: any, errors: any) {
+    return setRePasswordErrorClass(rePassword, errors);
+  }
+
   register() {
     if (this.form.invalid) {
       return;
     }
 
     console.log(this.form.value);
+    this.form.reset();
   }
 }

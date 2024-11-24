@@ -10,3 +10,17 @@ export function emailValidator(domains: string[]): ValidatorFn {
     return isInValid ? null : { emailValidator: true };
   };
 }
+
+export function matchPasswordValidator(
+  passwordControl: string,
+  rePasswordControl: string
+): ValidatorFn {
+  return (control) => {
+    const password = control.get(passwordControl)?.value;
+    const rePassword = control.get(rePasswordControl)?.value;
+
+    const areMatch = password === rePassword;
+
+    return areMatch ? null : { matchPasswordValidator: true };
+  };
+}

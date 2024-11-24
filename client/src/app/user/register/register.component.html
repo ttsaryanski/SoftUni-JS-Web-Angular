@@ -107,12 +107,6 @@
           }
         </div>
         }
-        <!-- <p class="error">
-                    Password is required!
-                </p>
-                <p class="error">
-                    Password must be at least 4 characters!
-                </p> -->
 
         <!-- rePassword -->
         <p class="field field-icon">
@@ -122,6 +116,7 @@
             </span>
           </label>
           <input
+            [class]="setRePasswordClass(passGroup?.get('rePassword'), passGroup?.errors?.['matchPasswordValidator'])"
             type="password"
             name="rePassword"
             id="rePassword"
@@ -129,7 +124,17 @@
             formControlName="rePassword"
           />
         </p>
-        <!-- <p class="error">Repeat Password does not match password!</p> -->
+        @if(passGroup?.get('rePassword')?.touched){
+        <div>
+          @if(passGroup?.get('rePassword')?.errors?.['required']){
+          <p class="error">Repeat Password is required!</p>
+          }
+          <!--  -->
+          @if(passGroup?.errors?.['matchPasswordValidator']){
+          <p class="error">Repeat Password does not match password!</p>
+          }
+        </div>
+        }
       </div>
 
       <button

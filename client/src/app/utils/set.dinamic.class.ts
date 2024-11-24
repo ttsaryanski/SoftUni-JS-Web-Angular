@@ -19,6 +19,16 @@ export function setPasswordErrorClass(password: any): string {
   return '';
 }
 
+export function setRePasswordErrorClass(rePassword: any, error: any): string {
+  if (rePassword?.touched && rePassword?.errors?.['required']) {
+    return 'input-error';
+  }
+  if (rePassword?.touched && error) {
+    return 'input-error';
+  }
+  return '';
+}
+
 export function setUsernameErrorClass(username: any): string {
   if (username?.touched && username?.errors?.['required']) {
     return 'input-error';
