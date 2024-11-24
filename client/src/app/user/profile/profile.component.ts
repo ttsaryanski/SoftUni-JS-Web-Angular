@@ -1,27 +1,62 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
-import { User } from '../../types/user';
+import { User, UserForAuth } from '../../types/user';
 import { Router } from '@angular/router';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { emailValidator } from '../../utils/validators';
+import { DOMAINS } from '../../constants';
 
 @Component({
-    selector: 'app-profile',
-    standalone: true,
-    imports: [],
-    templateUrl: './profile.component.html',
-    styleUrl: './profile.component.css'
+  selector: 'app-profile',
+  standalone: true,
+  imports: [ReactiveFormsModule],
+  templateUrl: './profile.component.html',
+  styleUrl: './profile.component.css',
 })
 export class ProfileComponent implements OnInit {
-    currentUser: any;
+  isEditMode: boolean = false;
+  currentUser = {} as UserForAuth;
+  form!: FormGroup;
 
-    constructor(private userService: UserService, private router: Router) { };
+  constructor(private userService: UserService, private router: Router) {}
 
-    ngOnInit(): void {
-        this.currentUser = this.userService.getUser(); 
-    };
+  ngOnInit(): void {
+    this.currentUser = this.userService.getUser();
 
-    editProfile(event: Event) {
-        event.preventDefault();
-        this.router.navigate(['/xxx']);
+    this.form = new FormGroup({
+      username: new FormControl(this.currentUser.username, [
+        Validators.required,
+        Validators.minLength(5),
+      ]),
+      email: new FormControl(this.currentUser.email, [
+        Validators.required,
+        emailValidator(DOMAINS),
+      ]),
+      tel: new FormControl(this.currentUser.tel),
+    });
+  }
+
+  saveUser() {
+    if (this.form.invalid) {
+      return;
     }
+    console.log(this.form.value);
 
+    this.currentUser = this.form.value as UserForAuth;
+    this.toggleEditMode();
+  }
+
+  onCancel(event: Event) {
+    event.preventDefault();
+    this.toggleEditMode();
+  }
+
+  toggleEditMode() {
+    this.isEditMode = !this.isEditMode;
+  }
 }
