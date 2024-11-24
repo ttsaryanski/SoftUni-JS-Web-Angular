@@ -1,22 +1,37 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ApiService } from '../../api.service';
+import { FormsModule, NgForm } from '@angular/forms';
+import { setButtonAttributes } from '../../utils/buttonStatus';
 
 @Component({
-    selector: 'app-create-theme',
-    standalone: true,
-    imports: [RouterLink],
-    templateUrl: './create-theme.component.html',
-    styleUrl: './create-theme.component.css',
+  selector: 'app-create-theme',
+  standalone: true,
+  imports: [RouterLink, FormsModule],
+  templateUrl: './create-theme.component.html',
+  styleUrl: './create-theme.component.css',
 })
 export class CreateThemeComponent {
-    constructor(private apiService: ApiService, private route: ActivatedRoute, private router: Router){};
+  constructor(
+    private apiService: ApiService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
-    createTheme(event: Event, themeName: string, themeText: string) {
-        event.preventDefault();
+  setButton(form: any) {
+    return setButtonAttributes(form);
+  }
 
-        //this.apiService.createTheme(themeName, themeText).subscribe((data) => {})
-        this.router.navigate(['/xxx']);
+  createTheme(form: NgForm) {
+    console.log(form.invalid);
+
+    if (form.invalid) {
+      return;
     }
-};
 
+    console.log(form.value);
+    form.reset();
+    //this.apiService.createTheme(themeName, themeText).subscribe((data) => {})
+    //this.router.navigate(['/xxx']);
+  }
+}
