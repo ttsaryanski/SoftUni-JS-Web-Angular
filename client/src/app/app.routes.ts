@@ -35,7 +35,10 @@ export const routes: Routes = [
   },
   {
     path: 'create-theme',
-    component: CreateThemeComponent,
+    loadComponent: () =>
+      import('./theme/create-theme/create-theme.component').then(
+        (c) => c.CreateThemeComponent
+      ),
     canActivate: [isAuthenticated],
   },
 

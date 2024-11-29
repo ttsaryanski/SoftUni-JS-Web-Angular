@@ -6,13 +6,13 @@
     @if (!isEditMode) {
     <ng-container>
       <div class="flex">
-        <p>Username: {{ currentUser.username }}</p>
+        <p>Username: {{ profileDetails.username }}</p>
       </div>
       <div class="flex">
-        <p>Email: {{ currentUser.email }}</p>
+        <p>Email: {{ profileDetails.email }}</p>
       </div>
       <div class="flex">
-        <p>Phone: {{ currentUser.tel }}</p>
+        <p>Phone: {{ profileDetails.tel }}</p>
       </div>
       <button class="edit-button" (click)="toggleEditMode()">Edit</button>
     </ng-container>
