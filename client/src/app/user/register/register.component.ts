@@ -5,7 +5,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { setButtonAttributes } from '../../utils/buttonStatus';
 import {
   setEmailErrorClass,
@@ -15,11 +15,14 @@ import {
 } from '../../utils/set.dinamic.class';
 import { emailValidator, matchPasswordValidator } from '../../utils/validators';
 import { DOMAINS } from '../../constants';
+import { UserService } from '../user.service';
+import { ErrorMsgService } from '../../core/error-msg/error-msg.service';
+import { ErrorMsgComponent } from '../../core/error-msg/error-msg.component';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [RouterLink, ReactiveFormsModule],
+  imports: [RouterLink, ReactiveFormsModule, ErrorMsgComponent],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
 })
@@ -49,6 +52,45 @@ export class RegisterComponent {
     return this.form.get('passGroup');
   }
 
+  hasError: boolean = false;
+
+  constructor(
+    private userService: UserService,
+    private router: Router,
+    private errorMsgService: ErrorMsgService
+  ) {
+    this.errorMsgService.apiError$.subscribe((err) => {
+      this.hasError = !!err;
+    });
+  }
+
+  register() {
+    if (this.form.invalid) {
+      return;
+    }
+
+    const {
+      username,
+      email,
+      tel,
+      passGroup: { password, rePassword } = {},
+    } = this.form.value;
+
+    this.userService
+      .register(username!, email!, tel!, password!, rePassword!)
+      .subscribe({
+        next: () => {
+          this.hasError = false;
+          this.errorMsgService.clearError();
+          this.router.navigate(['/home']);
+          this.form.reset();
+        },
+        error: () => {
+          this.hasError = true;
+        },
+      });
+  }
+
   setButton(form: any) {
     return setButtonAttributes(form);
   }
@@ -67,14 +109,5 @@ export class RegisterComponent {
 
   setRePasswordClass(rePassword: any, errors: any) {
     return setRePasswordErrorClass(rePassword, errors);
-  }
-
-  register() {
-    if (this.form.invalid) {
-      return;
-    }
-
-    console.log(this.form.value);
-    this.form.reset();
   }
 }

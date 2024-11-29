@@ -26,7 +26,7 @@ export class ProfileComponent implements OnInit {
   constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit(): void {
-    this.currentUser = this.userService.getUser();
+    // this.currentUser = this.userService.getProfile();
 
     this.form = new FormGroup({
       username: new FormControl(this.currentUser.username, [

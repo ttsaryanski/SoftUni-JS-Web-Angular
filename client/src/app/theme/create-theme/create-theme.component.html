@@ -3,7 +3,7 @@
     <div class="header-background">
       <span>New Theme</span>
     </div>
-    <form #form="ngForm" (ngSubmit)="createTheme(form)">
+    <form #form="ngForm" (ngSubmit)="create(form)">
       <div class="new-theme-title">
         <label for="themeName">Title <span class="red">*</span></label>
         <input
@@ -37,18 +37,18 @@
           rows="8"
           class="height"
           ngModel
-          #themeText="ngModel"
+          #postText="ngModel"
           required
           minlength="10"
         ></textarea>
 
-        @if (themeText?.touched) {
+        @if (postText?.touched) {
         <div>
-          @if (themeText?.errors?.['required']) {
+          @if (postText?.errors?.['required']) {
           <p class="error">The field with your post is required.</p>
           }
           <!-- -->
-          @if (themeText?.errors?.['minlength']) {
+          @if (postText?.errors?.['minlength']) {
           <p class="error">Post must be at least 10 characters long.</p>
           }
         </div>

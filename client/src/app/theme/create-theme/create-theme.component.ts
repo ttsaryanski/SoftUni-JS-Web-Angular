@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { ApiService } from '../../api.service';
 import { FormsModule, NgForm } from '@angular/forms';
 import { setButtonAttributes } from '../../utils/buttonStatus';
@@ -12,26 +12,22 @@ import { setButtonAttributes } from '../../utils/buttonStatus';
   styleUrl: './create-theme.component.css',
 })
 export class CreateThemeComponent {
-  constructor(
-    private apiService: ApiService,
-    private route: ActivatedRoute,
-    private router: Router
-  ) {}
+  constructor(private apiService: ApiService, private router: Router) {}
 
-  setButton(form: any) {
-    return setButtonAttributes(form);
-  }
-
-  createTheme(form: NgForm) {
-    console.log(form.invalid);
-
+  create(form: NgForm) {
     if (form.invalid) {
       return;
     }
 
-    console.log(form.value);
-    form.reset();
-    //this.apiService.createTheme(themeName, themeText).subscribe((data) => {})
-    this.router.navigate(['/themes']);
+    const { themeName, postText } = form.value;
+
+    this.apiService.createTheme(themeName, postText).subscribe((data) => {
+      this.router.navigate(['/themes']);
+      form.reset();
+    });
+  }
+
+  setButton(form: any) {
+    return setButtonAttributes(form);
   }
 }
